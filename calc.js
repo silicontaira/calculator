@@ -20,7 +20,7 @@ numButts.forEach(numButt => numButt.addEventListener('click', function() {
 }));
 opButts.forEach(opButt => opButt.addEventListener('click', opPress));
 eqlButt.addEventListener('click', function() {
-    if (operator == undefined) {
+    if (operator == undefined || operator == '') {
         return;
     }
     else {
@@ -63,7 +63,6 @@ function display(num) {
         screen.textContent = num;
         newNumFlag = 0;
     }
-
 }
 
 function clear(e) {
@@ -78,6 +77,7 @@ function opPress(e) {
     operator = this.id;
     newNumFlag = 1;
 }
+
 //Basic math functions
 function sum(a, b) {
     return a + b;
@@ -99,8 +99,5 @@ function divide(a, b) {
 /******************errors
 problem: after '=' is pushed when new number is entered it appends to the displayText
 solution: new number should overwrite displayText
-
-problem: pressing a number then '=' deletes the number and returns a blank
-solution: it should keep the same number there 3 then '=' should give a '3'
                          ****************/
                         
