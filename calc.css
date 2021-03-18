@@ -1,0 +1,88 @@
+h1 {
+    text-align: center;
+    color: white;
+}
+
+body {
+    background-color: black;
+}
+
+#calcContainer {
+    display: grid;
+    margin: auto;
+    grid-template-columns: repeat(4, 50px);
+    grid-template-rows: repeat(6, 50px);
+    background-color: white;
+    width: 200px;
+    height: 300px;
+    grid-template-areas: 
+        "display display display display"
+        "clear signChange percent divide"
+        "seven eight nine multiply"
+        "four five six subtract"
+        "one two three sum"
+        "zero zero dot equal"
+}
+
+#screen {
+    grid-area: display;
+    text-align:end;
+    padding: 0px 20px 0px 20px;
+}
+#zero {
+    grid-area: zero;
+}
+#dot {
+    grid-area: dot;
+}
+#one {
+    grid-area: one;
+}
+#two {
+    grid-area: two;
+}
+#three {
+    grid-area: three;
+}
+#four {
+    grid-area: four;
+}
+#five {
+    grid-area: five;
+}
+#six {
+    grid-area: six;
+}
+#seven {
+    grid-area: seven;
+}
+#eight {
+    grid-area: eight;
+}
+#nine {
+    grid-area: nine;
+}
+#equal {
+    grid-area: equal;
+}
+#sum {
+    grid-area: sum;
+}
+#subtract {
+    grid-area: subtract;
+}
+#multiply {
+    grid-area: multiply;
+}
+#divide {
+    grid-area: divide;
+}
+#clear {
+    grid-area: clear;
+}
+#signChange {
+    grid-area: signChange;
+}
+#percent {
+    grid-area: percent;
+}
