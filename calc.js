@@ -5,7 +5,8 @@ let displayNum = 0;
 let firstNum = 0;
 let total = 0;
 let operator;
-let newNumFlag = 0;
+let newNumFlag = 0;                             //status flag created to know when to append numbers together or replace them on the screen
+                                                //i.e. pressing 3 twice in a row should equal 33 but without the flag it would just end up replacing 3 with 3
 let finalNum = 0;
 const numButts = document.querySelectorAll('.numButt');
 const opButts = document.querySelectorAll('.opButt');
@@ -20,7 +21,7 @@ numButts.forEach(numButt => numButt.addEventListener('click', function() {
 }));
 opButts.forEach(opButt => opButt.addEventListener('click', opPress));
 eqlButt.addEventListener('click', function() {
-    if (operator == undefined || operator == '') {
+    if (operator == undefined) {
         return;
     }
     else {
@@ -30,6 +31,7 @@ eqlButt.addEventListener('click', function() {
         console.log(finalNum);
         newNumFlag = 1;
         display(finalNum);
+        newNumFlag = 1;
     }
 });
 clrButt.addEventListener('click', clear);
@@ -50,7 +52,7 @@ function operate(operator, a, b) {
     }
 }
 
-function display(num) {
+function display(num) {                             //Updates calc screen
     if (newNumFlag == 0) {
         if (screen.textContent == 0) {
             screen.textContent = num;
@@ -70,8 +72,10 @@ function clear(e) {
     firstnum = 0;
     displayNum = 0;
     total = 0;
-    operator ='';
+    operator = undefined;
+    newNumFlag = 0;
 }
+
 function opPress(e) {
     firstNum = displayNum;
     operator = this.id;
