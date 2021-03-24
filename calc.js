@@ -62,7 +62,6 @@ signChange.addEventListener('click', function() {
 });
 
 document.addEventListener('keypress', function(e) {
-    console.log(e.keyCode);
     if (48 <= e.keyCode && e.keyCode <= 57) {           //Keycode for numbers 0-9
         let tempNum = parseFloat(e.key);
         display(tempNum);
@@ -110,6 +109,8 @@ function equals(e) {
         newNumFlag = 1;
         display(finalNum);
         newNumFlag = 1;
+        operator = undefined;
+        firstNum = 0;
     }
 }
 function operate(operator, a, b) {
@@ -160,14 +161,17 @@ function opPress(e) {                               //This function is for click
     }
     else{
         if (prevOperator == undefined) {
-            intNum = operate(operator, firstNum, displayNum);
+            //intNum = operate(operator, firstNum, displayNum);
         }
         else {
             intNum = operate(prevOperator, firstNum, displayNum);
+            newNumFlag = 1;
+            display(intNum);
+            firstNum = intNum;
         }
-        newNumFlag = 1;
+        /*newNumFlag = 1;
         display(intNum);
-        firstNum = intNum;
+        firstNum = intNum;*/
     }
     newNumFlag = 1;
     decFlag = 0;
@@ -175,23 +179,26 @@ function opPress(e) {                               //This function is for click
 
 function opButtPress(e) {                           //This function is for operator keyboard presses
     prevOperator = operator;
-        operator = e.key;
-        if(firstNum == 0) {
-            firstNum = displayNum;
+    operator = e.key;
+    if(firstNum == 0) {
+        firstNum = displayNum;
+    }
+    else{
+        if (prevOperator == undefined) {
+            //intNum = operate(operator, firstNum, displayNum);
         }
-        else{
-            if (prevOperator == undefined) {
-                intNum = operate(operator, firstNum, displayNum);
-            }
-            else {
-                intNum = operate(prevOperator, firstNum, displayNum);
-            }
+        else {
+            intNum = operate(prevOperator, firstNum, displayNum);
             newNumFlag = 1;
             display(intNum);
             firstNum = intNum;
         }
-        newNumFlag = 1;
-        decFlag = 0;
+        /*newNumFlag = 1;
+        display(intNum);
+        firstNum = intNum;*/
+    }
+    newNumFlag = 1;
+    decFlag = 0;
 }
 
 //Basic math functions
