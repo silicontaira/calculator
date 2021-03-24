@@ -19,26 +19,25 @@ const decimal = document.querySelector('#dot');
 const percent = document.querySelector('#percent');
 const signChange = document.querySelector('#signChange');
 
-//Event listener for anytime a number button is pressed
+//Event listener for anytime a number button is clicked
 numButts.forEach(numButt => numButt.addEventListener('click', function() { 
     let tempNum = parseFloat(this.textContent);
     display(tempNum);
     displayNum = parseFloat(screen.textContent);
 }));
 
-//Event listener for anytime an operation button is pressed
+//Event listener for anytime an operation button is clicked
 opButts.forEach(opButt => opButt.addEventListener('click', opPress));
 
-//Event listener for "=" button press
+//Event listener for "=" button click
 eqlButt.addEventListener('click', equals);
 
-//Event listener for "AC" button press
+//Event listener for "AC" button click
 clrButt.addEventListener('click', clear);
 
-//Event listener for "." button press
+//Event listener for "." button click
 decimal.addEventListener('click', function() {
     if (decFlag == 0) {
-        console.log(this.textContent);
         let dec = this.textContent;
         display(dec);
         displayNum = parseFloat(screen.textContent);
@@ -46,6 +45,7 @@ decimal.addEventListener('click', function() {
     }
 });
 
+//Event listener for "%" button click
 percent.addEventListener('click', function() {
     tempNum = parseFloat(screen.textContent)/100;
     newNumFlag = 1;
@@ -53,11 +53,50 @@ percent.addEventListener('click', function() {
     newNumFlag = 1;
 });
 
+//Event listener for "+/-" button click
 signChange.addEventListener('click', function() {
     tempNum = parseFloat(screen.textContent) * -1;
     newNumFlag = 1;
     display(tempNum);
     newNumFlag = 1;
+});
+
+document.addEventListener('keypress', function(e) {
+    console.log(e.keyCode);
+    if (48 <= e.keyCode && e.keyCode <= 57) {           //Keycode for numbers 0-9
+        let tempNum = parseFloat(e.key);
+        display(tempNum);
+        displayNum = parseFloat(screen.textContent);
+    }
+    if (e.keyCode == 37) {                              //Keycode for %
+        tempNum = parseFloat(screen.textContent)/100;
+        newNumFlag = 1;
+        display(tempNum);
+        newNumFlag = 1;
+    }
+    if (e.keyCode == 42) {                              //Keycode for *
+        opButtPress(e);
+    }
+    if (e.keyCode == 43) {                              //Keycode for +
+        opButtPress(e);
+    }
+    if (e.keyCode == 45) {                              //Keycode for -
+        opButtPress(e);
+    }
+    if (e.keyCode == 46) {                              //Keycode for .
+        if (decFlag == 0) {
+            let dec = e.key;
+            display(dec);
+            displayNum = parseFloat(screen.textContent);
+            decFlag = 1;    
+        }
+    }
+    if (e.keyCode == 47) {                              //Keycode for /
+        opButtPress(e);
+    }
+    if (e.keyCode == 13 || e.keyCode == 61) {
+        equals(e);
+    }
 });
 
 //Functions
@@ -66,9 +105,7 @@ function equals(e) {
         return;
     }
     else {
-        console.log(firstNum, displayNum);
         finalNum = operate(operator, firstNum, displayNum);
-        console.log(finalNum);
         firstNum = finalNum;
         newNumFlag = 1;
         display(finalNum);
@@ -76,16 +113,16 @@ function equals(e) {
     }
 }
 function operate(operator, a, b) {
-    if (operator == 'sum') {
+    if (operator == '+') {
         return sum(a, b);
     }
-    if (operator == 'subtract') {
+    if (operator == '-') {
         return subtract(a, b);
     }
-    if (operator == 'multiply') {
+    if (operator == '*') {
         return multiply(a, b);
     }
-    if (operator == 'divide') {
+    if (operator == '/') {
         return divide(a, b);
     }
 }
@@ -115,7 +152,7 @@ function clear(e) {
     decFlag = 0;
 }
 
-function opPress(e) {
+function opPress(e) {                               //This function is for clicking operator buttons
     prevOperator = operator;
     operator = this.id;
     if(firstNum == 0) {
@@ -134,6 +171,27 @@ function opPress(e) {
     }
     newNumFlag = 1;
     decFlag = 0;
+}
+
+function opButtPress(e) {                           //This function is for operator keyboard presses
+    prevOperator = operator;
+        operator = e.key;
+        if(firstNum == 0) {
+            firstNum = displayNum;
+        }
+        else{
+            if (prevOperator == undefined) {
+                intNum = operate(operator, firstNum, displayNum);
+            }
+            else {
+                intNum = operate(prevOperator, firstNum, displayNum);
+            }
+            newNumFlag = 1;
+            display(intNum);
+            firstNum = intNum;
+        }
+        newNumFlag = 1;
+        decFlag = 0;
 }
 
 //Basic math functions
@@ -155,6 +213,5 @@ function divide(a, b) {
 }
 
 /******************errors
- Add keyboard functionality
                          ****************/
                         
