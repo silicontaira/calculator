@@ -1,4 +1,5 @@
 h1 {
+    margin-top: 300px;
     text-align: center;
     color: white;
 }
@@ -7,14 +8,82 @@ body {
     background-color: black;
 }
 
+button {
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+button:hover {
+    background-color: rgb(196, 196, 196);
+}
+
+.numButt {
+    background-color: rgb(55, 55, 55);
+    font-weight: bold;
+    font-size: 20px;
+}
+.opButt {
+    background-color:  orange;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#equal {
+    background-color: orange;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#equal:hover {
+    background-color: rgb(196, 196, 196);
+}
+
+#dot {
+    background-color: rgb(55, 55, 55);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#dot:hover {
+    background-color: rgb(196, 196, 196);
+}
+
+#clear {
+    background-color: rgb(170, 170, 170);
+}
+
+#clear:hover {
+    background-color: rgb(196, 196, 196);
+}
+
+#percent {
+    background-color: rgb(170, 170, 170);
+}
+
+#percent:hover {
+    background-color: rgb(196, 196, 196);
+}
+
+#signChange {
+    background-color: rgb(170, 170, 170);
+}
+
+#signChange:hover {
+    background-color: rgb(196, 196, 196);
+}
+
 #calcContainer {
     display: grid;
-    margin: auto;
+    margin: 30px auto 0px auto;
+    border-radius: 10px;
     grid-template-columns: repeat(4, 50px);
     grid-template-rows: repeat(6, 50px);
-    background-color: white;
-    width: 200px;
-    height: 300px;
+    gap: 5px;
+    background-color: rgb(0, 0, 0);
+    width: 215px;
+    height: 325px;
     grid-template-areas: 
         "display display display display"
         "clear signChange percent divide"
@@ -26,6 +95,9 @@ body {
 
 #screen {
     grid-area: display;
+    margin: 10px 0 0 0;
+    color: white;
+    font-size: 30px;
     text-align:end;
     padding: 0px 20px 0px 20px;
 }

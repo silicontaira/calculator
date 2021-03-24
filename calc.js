@@ -50,6 +50,7 @@ percent.addEventListener('click', function() {
     tempNum = parseFloat(screen.textContent)/100;
     newNumFlag = 1;
     display(tempNum);
+    displayNum = parseFloat(screen.textContent);
     newNumFlag = 1;
 });
 
@@ -58,6 +59,7 @@ signChange.addEventListener('click', function() {
     tempNum = parseFloat(screen.textContent) * -1;
     newNumFlag = 1;
     display(tempNum);
+    displayNum = parseFloat(screen.textContent);
     newNumFlag = 1;
 });
 
@@ -71,6 +73,7 @@ document.addEventListener('keypress', function(e) {
         tempNum = parseFloat(screen.textContent)/100;
         newNumFlag = 1;
         display(tempNum);
+        displayNum = parseFloat(screen.textContent);
         newNumFlag = 1;
     }
     if (e.keyCode == 42) {                              //Keycode for *
@@ -129,16 +132,22 @@ function operate(operator, a, b) {
 }
 
 function display(num) {                             //Updates calc screen
+    let roundNum = round(num);
+    let stringNum = roundNum.toString();
+    if (stringNum.length > 11) {
+        let expNum = roundNum.toExponential();
+        roundNum = expNum;
+    }
     if (newNumFlag == 0) {
-        if (screen.textContent == 0) {
-            screen.textContent = num;
+        if (screen.textContent === '0') {
+            screen.textContent = roundNum;
         }
         else {
-            screen.textContent += num;
+            screen.textContent += roundNum;
         }
     }
     else {
-        screen.textContent = num;
+        screen.textContent = roundNum;
         newNumFlag = 0;
     }
 }
@@ -161,7 +170,7 @@ function opPress(e) {                               //This function is for click
     }
     else{
         if (prevOperator == undefined) {
-            //intNum = operate(operator, firstNum, displayNum);
+
         }
         else {
             intNum = operate(prevOperator, firstNum, displayNum);
@@ -169,9 +178,6 @@ function opPress(e) {                               //This function is for click
             display(intNum);
             firstNum = intNum;
         }
-        /*newNumFlag = 1;
-        display(intNum);
-        firstNum = intNum;*/
     }
     newNumFlag = 1;
     decFlag = 0;
@@ -185,7 +191,7 @@ function opButtPress(e) {                           //This function is for opera
     }
     else{
         if (prevOperator == undefined) {
-            //intNum = operate(operator, firstNum, displayNum);
+
         }
         else {
             intNum = operate(prevOperator, firstNum, displayNum);
@@ -193,12 +199,13 @@ function opButtPress(e) {                           //This function is for opera
             display(intNum);
             firstNum = intNum;
         }
-        /*newNumFlag = 1;
-        display(intNum);
-        firstNum = intNum;*/
     }
     newNumFlag = 1;
     decFlag = 0;
+}
+
+function round(num) {
+    return Math.round(num * 1000) / 1000;
 }
 
 //Basic math functions
@@ -218,7 +225,3 @@ function divide(a, b) {
     if (b == 0) return "ERROR";
     return a / b;
 }
-
-/******************errors
-                         ****************/
-                        
